@@ -2,11 +2,15 @@ package com.example.demo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Student {
     private long id;
     private String name;
  
     public Student() {
+    	
     }
  
     public Student(String name, String subject) {
