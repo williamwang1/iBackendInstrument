@@ -14,11 +14,11 @@ public class DemoApplication {
 		// SpringApplication.run(DemoApplication.class, args);
 		hmStudent=new HashMap<Long,Student>();
 		 
-	      Student one=new Student("John","math");
-	      hmStudent.put(new Long(one.getId()),one);	 	      
-	 
-	      Student two=new Student("Jane","history");
-	      hmStudent.put(new Long(two.getId()),two);
+//	      Student one=new Student("John","math");
+//	      hmStudent.put(new Long(one.getId()),one);	 	      
+//	 
+//	      Student two=new Student("Jane","history");
+//	      hmStudent.put(new Long(two.getId()),two);
 	      
 	      SpringApplication.run(DemoApplication.class, args);
 	}

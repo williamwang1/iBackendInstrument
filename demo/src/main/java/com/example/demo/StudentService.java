@@ -1,7 +1,11 @@
 package com.example.demo;
 
 import java.util.HashMap;
+import java.util.List;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,20 +16,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value="/rest/student")
 class StudentService{
- 
+	
+	
+	@Autowired
+	StudentRepository studentRepository;
+	
+	
+	// Get All Notes
    @RequestMapping(value="/",method = RequestMethod.GET)
-   public HashMap<Long,Student> getAllStudents(){
-      return DemoApplication.hmStudent;
+   public List<Student> getAllStudents() {
+      return studentRepository.findAll();
    }
    
+// Create a new Note
    @RequestMapping(value="/add",method = RequestMethod.POST)
-   public Student addStudent(@RequestParam(value="name") String name
-         ,@RequestParam(value="subject",defaultValue = "unknown") String subject) {
+/*   public Student addStudent(@RequestParam(value="name") String name
+         ,@RequestParam(value="subject",defaultValue = "unknown") String subject) {*/
+    public Student addStudent(@Valid @RequestBody Student student) {
+//      Student student=new Student(name,subject);
+//      DemoApplication.hmStudent.put(new Long(student.getId()),student);
+//      return student;
+	   return studentRepository.save(student);
     
-      Student student=new Student(name,subject);
-      DemoApplication.hmStudent.put(new Long(student.getId()),student);
-      return student;
-    
+   }
+   
+   @RequestMapping(value="/{id}",method = RequestMethod.GET)
+   public Student getStudent(@PathVariable long id){
+      return DemoApplication.hmStudent.get(new Long(id));
    }
    
    @RequestMapping(value="/update",method = RequestMethod.PUT)
@@ -40,10 +57,7 @@ class StudentService{
       return student;
    }
    
-   @RequestMapping(value="/{id}",method = RequestMethod.GET)
-   public Student getStudent(@PathVariable long id){
-      return DemoApplication.hmStudent.get(new Long(id));
-   }
+
    
    @RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE)
    public Student deleteStudent(@PathVariable long id) throws Exception {
