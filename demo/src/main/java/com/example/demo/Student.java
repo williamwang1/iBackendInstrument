@@ -19,12 +19,15 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import springfox.documentation.annotations.ApiIgnore;
 
 @Entity
 @Table(name="student")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value= {"createdAt", "updatedAt"},allowGetters = true)
+//@JsonIgnoreProperties(value= {"createdAt", "updatedAt"},allowGetters = true)
 public class Student implements Serializable {
     /**
 	 * 
@@ -33,6 +36,7 @@ public class Student implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	private long id;
 	
 	@NotBlank
@@ -40,15 +44,15 @@ public class Student implements Serializable {
     private String name;
 	
 	@NotBlank
-	@Column(nullable = false, updatable = false)
+	@Column(nullable = false)
 	private String subject;
 	
-	@Column(nullable = false, updatable = false)
+	@Column
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;

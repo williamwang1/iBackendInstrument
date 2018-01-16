@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DemoApplication;
+import com.example.demo.Student;
+import com.example.demo.StudentRepository;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value="/rest/student")
+@Api(value = "student", description = "Rest API for student operations", tags = "Student API")
 class StudentService{
 	
 	
@@ -24,6 +32,7 @@ class StudentService{
 	
 	// Get All Notes
    @RequestMapping(value="/",method = RequestMethod.GET)
+   @ApiOperation(value = "get all students", response = Student.class)
    public List<Student> getAllStudents() {
       return studentRepository.findAll();
    }
