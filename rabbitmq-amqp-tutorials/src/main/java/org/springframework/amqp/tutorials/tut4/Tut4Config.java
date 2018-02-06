@@ -13,18 +13,29 @@ public class Tut4Config {
     public DirectExchange direct() {
         return new DirectExchange("tut.direct");
     }
+    
+//    @Bean
+//    public ConnectionFactory connectionFactory() {
+//        CachingConnectionFactory connectionFactory =
+//            new CachingConnectionFactory("localhost");
+//        connectionFactory.setUsername("guest");
+//        connectionFactory.setPassword("guest");
+//        return connectionFactory;
+//    }
 
     @Profile("receiver")
     private static class ReceiverConfig {
 
         @Bean
         public Queue autoDeleteQueue1() {
-            return new AnonymousQueue();
+            // return new AnonymousQueue();
+        	return new Queue("hello3");
         }
 
         @Bean
         public Queue autoDeleteQueue2() {
-            return new AnonymousQueue();
+          //  return new AnonymousQueue();
+        	return new Queue("hello4");
         }
 
         @Bean

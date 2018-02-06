@@ -24,13 +24,16 @@ public class Tut5Config {
 
         @Bean
         public Queue autoDeleteQueue1() {
-            return new AnonymousQueue();
+            // return new AnonymousQueue();
+        	return new Queue("hello5");
         }
 
         @Bean
         public Queue autoDeleteQueue2() {
-            return new AnonymousQueue();
+          //  return new AnonymousQueue();
+        	return new Queue("hello6");
         }
+
 
         @Bean
         public Binding binding1a(TopicExchange topic, 

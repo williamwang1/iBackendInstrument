@@ -14,17 +14,28 @@ public class Tut3Config {
         return new FanoutExchange("tut.fanout");
     }
 
+//    @Bean
+//    public Queue hello1() {
+//        return new Queue("hello1");
+//    }
+//    
+//    @Bean
+//    public Queue hello2() {
+//        return new Queue("hello2");
+//    }
     @Profile("receiver")
     private static class ReceiverConfig {
 
         @Bean
         public Queue autoDeleteQueue1() {
-            return new AnonymousQueue();
+           // return new AnonymousQueue();
+        	return new Queue("hello1");
         }
 
         @Bean
         public Queue autoDeleteQueue2() {
-            return new AnonymousQueue();
+            //return new AnonymousQueue();
+        	return new Queue("hello2");
         }
 
         @Bean
